@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-const REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json'
+const REQUEST_URL = 'https://the-best-scotch.herokuapp.com/scotch'
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   year: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 5,
   },
   listView: {
     paddingTop: 20,
@@ -60,7 +61,7 @@ fetchData() {
     .then((response)=> response.json())
     .then((responseData) => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+        dataSource: this.state.dataSource.cloneWithRows(responseData),
         loaded: true,
       });
     })
@@ -75,7 +76,7 @@ fetchData() {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
+        renderRow={this.renderScotch}
         style={styles.listView}
         />
     );
@@ -84,21 +85,22 @@ fetchData() {
   renderLoadingView(){
     return (
       <View style={styles.container}>
-        <Text>Loading Movies...</Text>
+        <Text>Loading Scotch...</Text>
       </View>
     );
   }
 
-  renderMovie(movie){
+  renderScotch(scotch){
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: movie.posters.thumbnail}}
+          source={{uri: scotch.url}}
           style={styles.thumbnail}
            />
          <View style={styles.rightContainer}>
-           <Text style={styles.title}>{movie.title}</Text>
-           <Text style={styles.year}>{movie.year}</Text>
+           <Text style={styles.title}>{scotch.name}</Text>
+           <Text style={styles.year}>{scotch.region}</Text>
+           <Text style={styles.year}>{scotch.flavor}</Text>
          </View>
       </View>
     );
