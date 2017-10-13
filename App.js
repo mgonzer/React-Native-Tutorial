@@ -25,15 +25,21 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: 53,
     height: 81,
+    marginLeft: 10
   },
   title: {
     fontSize: 20,
-    marginBottom: 8,
+    marginBottom: 5,
     textAlign: 'center',
   },
   year: {
     textAlign: 'center',
     marginBottom: 5,
+  },
+  rating: {
+    textAlign: 'center',
+    marginBottom: 15
+
   },
   listView: {
     paddingTop: 20,
@@ -92,6 +98,7 @@ fetchData() {
 
   renderScotch(scotch){
     return (
+      <View>
       <View style={styles.container}>
         <Image
           source={{uri: scotch.url}}
@@ -101,8 +108,19 @@ fetchData() {
            <Text style={styles.title}>{scotch.name}</Text>
            <Text style={styles.year}>{scotch.region}</Text>
            <Text style={styles.year}>{scotch.flavor}</Text>
+           <Text style={styles.rating}>Rating: {scotch.rating}</Text>
          </View>
+
       </View>
+      <View
+        style={{
+          borderBottomColor: 'black',
+          borderBottomWidth: 1,
+          width: 520,
+        }}
+        />
+    </View>
+
     );
   }
 
